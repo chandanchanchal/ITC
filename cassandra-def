@@ -1,0 +1,73 @@
+DEFINITION 1:
+CREATE TABLE server_logs(
+
+   log_hour timestamp PRIMARYKEY,
+
+   log_level text,
+
+   message text,
+
+   server text
+
+   )
+
+partition key: log_hour 
+
+clustering columns: none
+
+DEFINITION 2:
+CREATE TABLE server_logs(
+
+   log_hour timestamp,
+
+   log_level text,
+
+   message text,
+
+   server text,
+
+   PRIMARY KEY (log_hour, log_level)
+
+   )
+
+partition key: log_hour 
+
+clustering columns: log_level
+
+DEFINITION 3:
+CREATE TABLE server_logs(
+
+   log_hour timestamp,
+
+   log_level text,
+
+   message text,
+
+   server text,
+
+   PRIMARY KEY ((log_hour, server))
+
+   )
+
+partition key: log_hour, server
+
+clustering columns: none
+
+DEFINITION 4:
+CREATE TABLE server_logs(
+
+   log_hour timestamp,
+
+   log_level text,
+
+   message text,
+
+   server text,
+
+   PRIMARY KEY ((log_hour, server),log_level)
+
+   )WITH CLUSTERING ORDER BY (column3 DESC);
+
+partition key: log_hour, server
+
+clustering columns: log_level
