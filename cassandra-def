@@ -34,6 +34,96 @@ partition key: log_hour
 
 clustering columns: log_level
 
+
+###########################################################
+
+i. Anti-Entropy
+The mechanism that ensures that every node contains update data.
+
+ii. Bigtable
+It is one of a base for the creation of Cassandra. It was created at Google in 2006 as a high-performance database system.
+
+iii. Bloom Filter
+It is an algorithm that determines if an element is a member of a particular set.
+
+iv. Cassandra
+Open-source, distributed database management system that handles a big set of data.
+
+v. Cluster
+Cassandra Cluster is a collection of many nodes. Many clusters together form a database.
+
+vi. Column
+It is the basic or the innermost unit in the database. It contains the main data or information.
+
+vii. Column Families
+It is a storage unit in keyspace. We can consider it as a table. It contains rows and columns, that in turn, contains the data.
+
+viii. Commit Log
+It is basically a median to enter the data in Memtable an SSTable. Before going to the Memtable and SSTable, the data is stored in the commit log. This ensures that at the time of failure, the data is not lost.
+
+ix. Compaction
+It is a process that basically compresses the storage. It basically merges large files and frees up space.
+
+x. Consistency Level
+This allows the user to set the number of replicas in a cluster. In these replicas, the data is copied and it increases the redundancies.
+Let’s revise Cassandra Features
+
+xi. Dynamo
+It is the other base of Cassandra. This along with principles of Bigtable led to the creation of Cassandra.
+
+xii. Failure Detection
+It is the process of determining the nodes that have experienced failure in a cluster.
+
+xiii. Fault-Tolerant
+It is the capacity of the database system to handle faults.
+
+
+xiv. Keyspace
+It is a storage unit in a database. Basically, it is the outermost container in a node. It contains many column families.
+
+xv. Memtable
+It is a storage table representation. The data flow here after going through the committable. After this, the data flush to disk as an SSTable.
+
+xvi. Node
+It basically represents a system. They contain many column families that contain data.
+Learn Cassandra Applications | Why Cassandra Is So Popular?
+
+xvii. NoSQL
+Cassandra NoSQL basically determines the collection of non-sequential data. In other words, it is a non-relational data.
+
+xviii. Primary key
+It is a row that basically determines the main row.
+
+xix. Replication
+It is a process in which the data is copied from one node to another. This process ensures redundancies.
+
+xx. Replication Factor
+It determines the number of replicas that are created in a cluster of a given data.
+
+xxi. Replication Strategy
+Basically, the strategy that used to carry out replication in the cluster.
+
+xxii. Row
+It is a storage unit. It is a part of column family and contains many columns.
+
+xxiii. Seed Node
+It is a kind of a node which is basically used by newly added nodes to get up and running.
+
+xxiv. SSTable
+A Sort string table. It allows high performance and can be compacted.
+
+xxv. SuperColumn
+It is a column which is basically a map of other columns. In one kind it contains all the columns.
+Read Cassandra Data Model | How Cassandra Stores Data
+
+xxvi. Thrift
+An API that uses when user deals with the table as a storage unit.
+################################################################################3
+xxvii. Timestamp
+Timestamp are column values that basically is given by the user. It determines the time of a column details.
+
+
+
 DEFINITION 3:
 CREATE TABLE server_logs(
 
