@@ -29,3 +29,8 @@ eventsDF = (
 
 
 describe history events
+
+
+UPDATE events SET eventType = 'click' WHERE eventType = 'clck'
+
+UPDATE delta.`/data/events/` SET eventType = 'click' WHERE eventType = 'clck'
