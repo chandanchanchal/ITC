@@ -43,3 +43,16 @@ WHEN MATCHED THEN
   UPDATE SET events.data = updates.data
 WHEN NOT MATCHED
   THEN INSERT (date, eventId, data) VALUES (date, eventId, data)
+  
+  
+  from pyspark.sql.functions import expr
+from pyspark.sql.functions import from_unixtime
+
+events = spark.read \
+  .option("inferSchema", "true") \
+  .json("/databricks-datasets/structured-streaming/events/") \
+  .withColumn("date", expr("time")) \
+  .drop("time") \
+  .withColumn("date", from_unixtime("date", 'yyyy-MM-dd'))
+  
+display(events)
