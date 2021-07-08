@@ -34,3 +34,12 @@ describe history events
 UPDATE events SET eventType = 'click' WHERE eventType = 'clck'
 
 UPDATE delta.`/data/events/` SET eventType = 'click' WHERE eventType = 'clck'
+
+
+MERGE INTO events
+USING updates
+ON events.eventId = updates.eventId
+WHEN MATCHED THEN
+  UPDATE SET events.data = updates.data
+WHEN NOT MATCHED
+  THEN INSERT (date, eventId, data) VALUES (date, eventId, data)
