@@ -1,0 +1,206 @@
+"[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',resourceGroup().name ,'/providers/','Microsoft.Compute/virtualMachines/',variables('vmName'))]"
+
+resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))
+
+
+"variables": {
+ "virtualNetworkName": "testvirtualNetwork",
+ "subnetName": "testSubnetName",
+    "databaseIdentifier": "[resourceId('Microsoft.SQL/servers/databases', parameters('sqlServerName'), concat(parameters('sqlDatabaseName')))]",
+ "subnetIdentifier": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]"
+  },
+
+
+
+"parameters": {
+    "primaryServiceBusNamespaceName": {
+      "type": "string",
+      "metadata": {
+        "description": "Service Bus namespace name"
+      }
+    },
+ "primaryServiceBusSku": {
+      "type": "string",
+      "metadata": {
+        "description": "Service bus SKU"
+      }
+    },
+
+
+even resources can have comments
+
+{
+      "apiVersion": "2017-04-01",
+      "name": "[parameters('primaryServiceBusNamespaceName')]",
+      "type": "Microsoft.ServiceBus/namespaces",
+      "location": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Service Bus namespace name"
+      },
+ "sku": {
+        "name": "[parameters('primaryServiceBusSku')]"
+      }
+    },
+
+
+
+
+"tags": {
+        "displayName": "SqlServer",
+        "environmentName": "[parameters('environmentName')]",
+        "Department":  "[variables('departmentName')]"
+     },
+
+ 
+
+
+"sqlServerProperties": {
+      "type": "object"
+    }, And the parameters file provides all the parameters to it as a single object, as shown next:    "sqlServerProperties": {
+      "value": {
+        "administratorLogin": "eCommerceAdmin",
+        "databaseName": "eCommerceDatabase",
+        "collation": "SQL_Latin1_General_CP1_CI_AS",
+        "edition": "Standard",
+        "maxSizeBytes": "1073741824",
+        "requestedServiceObjectiveName": "S0",
+        "sqlserverName": "armtemplatebooksqlserver",
+        "keyVaultName": "keyvaultarmtemplatebook",
+        "keyVaultResourceGroupName": "ARMPatterns",
+        "adminstratorPasswordSecretName": "adminstratorPasswordSQL"
+      }
+    },
+
+
+"parameters": {
+    "appServicesInfo": {
+      "type": "object"
+    },
+ "diagnosticlevel": {
+      "type": "string"
+    },
+    "resourceGroupInfo": {
+      "type": "array"
+    },
+    "sqlServerProperties": {
+      "type": "object"
+    },
+    "storagekey": {
+      "type": "securestring"
+    },
+    "TagsInfo": {
+      "type": "object"
+    }
+  }
+
+
+
+
+"parameters": {
+    "environmentName": {
+      "type": "string",
+      "allowedValues": [ "DEV", "TST", "PRD", "SIT", "PAT", "STG", "UAT" ]
+    },
+ "department": {
+      "type": "string",
+      "maxLength": 30,
+      "minLength": 5
+    },
+ "storageArray": {
+      "type": "array",
+      "maxLength": 5,
+      "minLength": 2
+    },
+ "countofVirtualMachines": {
+      "type": "int",
+      "minValue": 2,
+      "maxValue": 5     
+    }
+  }
+
+
+
+
+
+{
+      "type": "Microsoft.Sql/servers",
+      "kind": "v12.0",
+      "name": "[parameters('sqlServerName')]",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2017-10-01-preview",
+      "properties": {
+        "administratorLogin": "[parameters('sqlServerAdministratorLoginName')]",
+        "administratorLoginPassword": "[parameters('sqlServerAdministratorLoginPassword')]",
+ "version": "12.0"
+      }
+}
+
+
+
+
+
+
+{
+      "name": "[variables('sqlserverName')]",
+      "type": "Microsoft.Sql/servers",
+      "location": "[parameters('location')]",
+      "tags": {
+        "displayName": "SqlServer"
+      },
+      "apiVersion": "2014-04-01",
+      "properties": {
+        "administratorLogin": "[parameters('sqlAdministratorLogin')]",
+        "administratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
+        "version": "12.0"
+      },
+      "resources": [
+        {
+          "name": "[variables('databaseName')]",
+          "type": "databases",
+          "location": "[parameters('location')]",
+          "tags": {
+            "displayName": "Database"
+          },
+          "apiVersion": "2015-01-01",
+          "dependsOn": [
+            "[variables('sqlserverName')]"
+          ],
+          "properties":
+
+
+
+
+
+
+"outputs": {
+    "SQLServer1": {
+      "type": "string",
+      "value": "[reference(parameters('sqlServerProperties').sqlserverName).fullyQualifiedDomainName]"
+    },
+ "SQLServer": {
+      "type": "object",
+      "value": "[reference(parameters('sqlServerProperties').sqlserverName)]"
+    }
+  }
+
+
+
+
+
+
+"multiLocation": {
+      "copy": [
+        {
+          "name": "location",
+          "count": "[length(parameters('resourceGroupInfo'))]",
+          "input": {
+            "resourceGroupName": "[concat('RGP','-',parameters('environmentName'),'-', parameters('resourceGroupInfo')[copyIndex('location')].resourceGroupName )]",
+            "appServicePlanName": "[toLower(concat('asp','-',parameters('resourceGroupInfo')[copyIndex('location')].resourceGroupSuffix,'-',parameters('appServicePlanSkuName'),'-', parameters('environmentName')))]",
+            "webAppName": "[toLower(concat('web','-',parameters('resourceGroupInfo')[copyIndex('location')].resourceGroupSuffix,'-', parameters('appServicePlanSkuName'),'-', parameters('environmentName')))]"
+          }
+        }
+      ]
+    }
+
+
+
