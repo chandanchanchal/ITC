@@ -31,7 +31,7 @@ Before starting this lab, you will need the following prerequisites:
         named *demo*
 
     3.  Download all of the files located here:
-        https://github.com/chandanchanchal/adfdataflowdocs
+        https://github.com/chandanchanchal/adfdataflowdocs/tree/master/sampledata
 
     4.  If you have git installed, you can simply clone the *adfdataflowdocs*
         repository to your local machine. If not, you can download a ZIP file
