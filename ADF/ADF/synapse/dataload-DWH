@@ -141,3 +141,7 @@ WITH
     DISTRIBUTION = ROUND_ROBIN,
     CLUSTERED COLUMNSTORE INDEX
 );
+
+
+
+########################## code for dataload #############################
